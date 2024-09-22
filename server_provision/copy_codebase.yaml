@@ -1,0 +1,53 @@
+---
+- name: Copy codebase to remote server
+  hosts: all
+  tasks:
+    - name: Create App directory
+      file:
+        path: /home/akinniyi/craftdot/
+        state: directory
+        owner: akinniyi
+        group: craftdotgroup
+        mode: "0777"
+
+    - name: Synchronize codebase to remote server
+      ansible.posix.synchronize:
+        dest: /home/akinniyi/craftdot/
+        src: /home/tech-server/craftdot/
+        owner: true
+        group: true
+        mode: push
+        checksum: true
+        rsync_opts:
+          - '--exclude=.git'
+          - '--exclude=.venv'
+          - '--exclude=.gitignore'
+          - '--exclude=__pycache__'
+          - '--exclude=run.py'
+          - '--exclude=craftdot.db'
+          
+      become: yes
+
+    - name: Change group ownership to 'craftdotgroup'
+      ansible.builtin.command:
+        cmd: chgrp -R craftdotgroup /home/akinniyi/craftdot/
+      become: yes
+
+    - name: Verify group ownership
+      command: ls -l /home/akinniyi/craftdot/
+      register: ls_output
+
+    - name: Display the group ownership
+      debug:
+        msg: "{{ ls_output.stdout_lines }}"
+
+    #- name: Change mode, owner and group for static files
+    #  ansible.builtin.file:
+    #    path: /home/akinniyi/craftdotss/frontend/static
+    #    mode: '0755'
+    #    owner: www-data
+    #    group: www-data
+    #    recurse: yes
+    #    state: directory
+    #  become: yes
+      

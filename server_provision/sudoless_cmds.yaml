@@ -1,0 +1,48 @@
+---
+- name: Copy codebase to remote server
+  hosts: development
+  tasks:
+    - name: Create File for User rysnc
+      file:
+        path:  /etc/sudoers.d/craftdot_sudoless_cmds
+        state: touch
+        owner: root
+        group: root
+        mode: "0440"
+      become: true
+
+    - name: Allow user to run rsync without password prompt
+      become: yes
+      lineinfile:
+        dest: /etc/sudoers.d/craftdot_sudoless_cmds
+        line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: /usr/bin/rsync"
+        validate: 'visudo -cf %s'
+        insertafter: EOF
+      when: ansible_user != "root"
+
+    - name: Allow user to create gunicorn dirs without password prompt
+      become: yes
+      lineinfile:
+        dest: /etc/sudoers.d/craftdot_sudoless_cmds
+        line: "gunicorn ALL=(ALL) NOPASSWD: /bin/mkdir"
+        validate: 'visudo -cf %s'
+        insertafter: EOF
+      when: ansible_user != "root"
+
+    - name: Allow user to chmod gunicorn dirs without password prompt
+      become: yes
+      lineinfile:
+        dest: /etc/sudoers.d/craftdot_sudoless_cmds
+        line: "gunicorn ALL=(ALL) NOPASSWD: /bin/chmod"
+        validate: 'visudo -cf %s'
+        insertafter: EOF
+      when: ansible_user != "root"
+
+    - name: Allow user to chown to gunicorn without password prompt
+      become: yes
+      lineinfile:
+        dest: /etc/sudoers.d/craftdot_sudoless_cmds
+        line: "gunicorn ALL=(ALL) NOPASSWD: /bin/chown"
+        validate: 'visudo -cf %s'
+        insertafter: EOF
+      when: ansible_user != "root"

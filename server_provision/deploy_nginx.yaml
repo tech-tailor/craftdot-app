@@ -1,0 +1,46 @@
+---
+- name: Deploy Flask app with Ansible
+  hosts: all
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name:
+          - nginx
+        state: present
+      become: yes
+
+
+    - name: Copy nginx conf to the server
+      ansible.builtin.copy:
+        src: craftdot.conf
+        dest: /etc/nginx/sites-available
+        mode: '0755'
+      become: true
+
+    - name: Symlink sites-available to site-enamled
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/craftdot.conf
+        dest: /etc/nginx/sites-enabled/craftdot.conf
+        state: link
+      become: true
+
+    - name: Check if the config syntax is okay
+      ansible.builtin.shell:
+        cmd: nginx -t
+      become: true
+      register: nginx_check
+    
+
+    - name: Reload nginx service
+      ansible.builtin.systemd_service:
+        name: nginx
+        state: reloaded
+      become: true
+
+
+    # Enable Nginx service to start on boot
+    - name: Enable nginx service
+      ansible.builtin.systemd_service:
+        name: nginx
+        enabled: true
+      become: true

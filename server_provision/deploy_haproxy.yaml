@@ -1,0 +1,31 @@
+- name: Deploy Haproxy Load Balancer
+  hosts: development
+  tasks:
+    - name: Install Haproxy
+      ansible.builtin.apt:
+        name:
+          - haproxy
+        state: present
+      become: yes
+
+    - name: Copy Haproxy conf to the server
+      ansible.builtin.copy:
+        src: haproxy.conf
+        dest: /etc/haproxy/haproxy.cfg
+        mode: '0644'
+      become: true
+
+    - name: Validate HAProxy configuration
+      ansible.builtin.command: haproxy -c -f /etc/haproxy/haproxy.cfg
+      become: yes
+
+    - name: Ensure Haproxy Enabled and Started
+      ansible.builtin.systemd:
+        name: haproxy
+        enabled: yes
+        state: started
+      become: yes
+
+    - name: Reload Haproxy
+      ansible.builtin.command: sudo systemctl reload haproxy
+      become: yes

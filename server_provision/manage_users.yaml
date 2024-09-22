@@ -1,0 +1,30 @@
+- name: Manage users(fileowner, gunicorn, nginx) and permission
+  hosts: all
+  tasks:
+    - name: Ensure 'craftdotgroup' group exists
+      group:
+        name: craftdotgroup
+        state: present
+      become: yes
+
+
+    - name: Add the user running Ansible to craftdotgroup
+      user:
+        name: "{{ ansible_user }}"
+        groups: craftdotgroup
+        append: yes
+      become: yes
+
+    - name: Add user gunicorn to craftdotgroup
+      user:
+        name: gunicorn
+        groups: craftdotgroup
+        append: yes
+      become: yes
+
+    - name: Add the user nginx to craftdotgroup
+      user:
+        name: nginx
+        groups: craftdotgroup
+        append: yes
+      become: yes

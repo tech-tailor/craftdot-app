@@ -1,0 +1,36 @@
+---
+- name: Deploy Flask app with Ansible
+  hosts: development
+  tasks:
+
+    # Copy codebase to the server
+   
+
+    - name: Install Python 3
+      ansible.builtin.apt:
+        name:
+          - python3
+          - nginx
+          - python3-venv
+        state: present
+      become: yes
+
+    - name: Create a virtual enviroment
+      ansible.builtin.shell:
+        cmd: cd /home/akinniyi/craftdot; python3 -m venv .venv
+      args:
+        creates: ./home/akinniyi/craftdot/.venv/bin/activate
+
+    - name: Install dependencies from the requirement.txt
+      ansible.builtin.pip:
+        requirements: /home/akinniyi/craftdot/requirements.txt
+        executable: /home/akinniyi/craftdot/.venv/bin/pip3
+        state: latest
+
+    - name: Create Gunicorn user to handle gunicorn related files and process
+      ansible.builtin.user:
+        name: gunicorn
+        state: present
+        shell: /bin/bash
+        createhome: no
+      become: true

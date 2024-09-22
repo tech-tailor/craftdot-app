@@ -1,0 +1,79 @@
+---
+- name: Deploy Craftdot Frontend with Gunicorn
+  hosts: development
+  tasks:
+    - name: Install Gunicorn packages
+      ansible.builtin.pip:
+        name: gunicorn
+        executable: /home/akinniyi/craftdot/.venv/bin/pip3
+        state: latest 
+      become: yes
+
+    - name: Create gunicorn directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: gunicorn
+        group: gunicorn
+        mode: "0755"
+      loop:
+        - /var/log/gunicorn
+        - /var/run/gunicorn
+      become: true
+
+    # Create systemd service file for Gunicorn
+    - name: Create Gunicorn craftdot systemd service file
+      copy:
+        content: |
+          [Unit]
+          Description=Gunicorn Daemon for My Flask App
+          After=network.target
+        
+          [Service]
+          User=gunicorn
+          Group=craftdotgroup
+          WorkingDirectory=/home/akinniyi/craftdot
+          StandardOutput=journal
+          StandardError=journal
+          ExecStartPre=/bin/sudo /bin/mkdir -p /var/log/gunicorn /var/run/gunicorn
+          ExecStartPre=/bin/sudo /bin/chown -R gunicorn:gunicorn /var/log/gunicorn /var/run/gunicorn
+          ExecStartPre=/bin/sudo /bin/chmod -R 755 /var/log/gunicorn 
+          ExecStartPre=/bin/sudo /bin/chmod -R 755 /var/run/gunicorn
+          ExecStart=/home/akinniyi/craftdot/.venv/bin/gunicorn --config /home/akinniyi/craftdot/craftdot_frontend_gunicorn_conf.py frontend.app:app
+          ExecReload=/bin/kill -HUP $MAINPID
+          ExecStop=/usr/bin/kill -TERM $MAINPID
+
+          Restart=on-failure
+          TimeoutStartSec=15
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/craftdot_frontend_gunicorn.service
+      become: true
+
+    # Reload systemd configuration to recognize the new service
+    - name: Reload systemd
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+      become: true
+
+    - name: Reload service gunicorn, in all cases
+      ansible.builtin.systemd_service:
+        name: craftdot_frontend_gunicorn
+        state: reloaded
+      become: true
+
+
+    # Enable Gunicorn service to start on boot
+    - name: Enable Gunicorn service
+      ansible.builtin.systemd_service:
+        name: craftdot_frontend_gunicorn.service
+        enabled: true
+      become: true
+
+
+    
+
+    
+
+    

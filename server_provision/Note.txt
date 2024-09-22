@@ -1,0 +1,8 @@
+Steps to configure  my server
+0 manage_users.yaml
+1. run sudoless_cmds.yaml
+2. copy_codebase.yaml
+3. install_packages.yaml
+4. deploy_api_gunicorn.yaml
+5. deploy_frontend_gunicorn.yaml
+6. deploy_nginx.yaml
