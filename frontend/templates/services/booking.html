@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking.css') }}">
+{% endblock %}
+
+
+{% block title %}Booking{% endblock %}
+
+{% block additional_nav%} {% endblock %}
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+
+  <section>
+    <div class="search-container">
+      <form class="" role="search">
+        <input class="form-control me-2 mb-3" type="search" placeholder="Search for a service" aria-label="Search">
+        <button class="btn btn-outline-info text-center" type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+  
+  <section>
+    <div class="services">
+      {% if services %}
+      <p class="text-center text-bold">Pick your service from the list</p>
+      <div class="services-list">
+        {% for service in services %}
+        
+        <a href="{{ url_for('service.booking_detail', service_id=service.id) }}" class="service-link"><button type="submit" class="btn btn-outline-info service">{{ service.name }}</button></a>
+        
+        {% endfor %}
+        
+        
+        
+      </div>
+      {% else %}
+      <p class="text-center">No Service yet</p>
+      {% endif %}
+    </div>
+  </section>
+
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %} {% endblock footer%}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/services/booking.js') }}"></script>
+{% endblock %}
+

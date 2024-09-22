@@ -1,0 +1,180 @@
+/* Reset and Basic Styles */
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}
+
+/* Page settings*/
+.bar-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: 1px solid #ccc;
+    padding: 20px;    
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.progress-item {
+    flex-grow: 1;
+    align-self: center;
+    margin-left: 10px;
+    height: 20px;
+
+}
+
+.task-headline {
+    padding: 20px;
+    border: 1px solid #cccccc;
+    font-weight: 400;
+
+}
+
+.artisan-board {
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+.sorting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 30px 0;
+    gap: 20px;
+    background-color: #eeeeee;
+    justify-content: flex-start;
+}
+.sort-label {
+    margin-left: 20px;
+    
+    font-weight: 700;
+    font-size: large;
+}
+
+.sort-option{
+    margin-right: 20px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.artisan-card {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "user-picture name name price"
+        "user-picture reviews reviews ."
+        ". service service ."
+        ". state state .";
+    column-gap: 10px;
+    row-gap: 10px;
+    max-width: 100%;
+    padding: 10px;
+}
+
+.user-picture {
+    grid-area: user-picture;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: #faf7f7;
+    justify-self: start;
+}
+
+.name {
+    grid-area: name;
+    font-weight: 600;
+}
+
+.price {
+ 
+    font-weight: 600;
+    grid-area: price;
+    font-size: large;
+    justify-self: end;
+}
+
+.reviews {
+    grid-area: reviews;
+}
+
+.service {
+    grid-area: service;
+    font-weight: 600;
+}
+
+.state {
+    grid-area: state;
+}
+
+
+.experience {
+    background-color: #eeeeee;
+    padding: 20px;
+}
+
+.schedule-btn {
+    text-align: center;
+    width: 100%;
+}
+
+/* Modal styles settings */
+.schedule-modal-cont {
+    width: 100%;
+    text-align: start;
+    margin: 0px;
+}
+.artisan-image {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background-color: #faf7f7;
+    justify-self: start;
+}
+
+.modal-body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eeeeee;
+    row-gap: 15px;
+
+}
+
+.info-text {
+    font-size: 0.8em;
+    border-bottom: 1px solid #cccccc;
+    align-self: flex-start;
+}
+
+.request-date-time {
+    font-size: 1em;
+    align-self: flex-start;
+    
+}
+
+.tasker-time {
+    font-size: 1em;
+    align-self: flex-start;
+    padding: 3px;
+    background-color: #cccccc;
+}
+
+.schedule-submit-btn {
+    width: 100%;
+}

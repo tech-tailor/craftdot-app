@@ -1,0 +1,166 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<!-- page css-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking_recommendation.css') }}">
+<!-- Jquery date picker-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<!-- Jquery time picker-->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+{% endblock %}
+
+{% block title %}Booking{% endblock %}
+
+{% block header %}
+<div id="header-cont" class="blurred">
+  <div class="bar-logo">
+    <a href="{{ url_for('main.home')}}"><img class="logo" src="{{ url_for('static', filename='favicon.ico')}}" alt=""></a>
+    <div class="progress progress-item" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar bg-info" style="width: 67%">2/3</div>
+    </div>
+  </div>
+  <div class="task-headline">Filter and sort to find your Crafter. Then view their availability to request your date and time.</div>
+  
+  <div class="sorting">
+    <label for="sortby" class="sort-label">Sortby:</label>
+    <select id="sortBy" name="sortby" class="form-select sort-option">
+      <option value="" selected>Recommended</option>
+      <option value="" selected>Price</option>
+      <option value="" selected>positive review</option>
+    </select>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block flashmessage %}
+{{ super() }}
+{% endblock %}
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  
+  <!-- Sample artisan board
+  <div class="artisan-board">
+    <div class="artisan-card">
+      <img class="user-picture" src="${artisanData.profile_picture}" alt="artis">
+      <p class="name">rtisanData.fir </p><br>
+      <p class="price">$3000/hr</p>
+      <p class="reviews"> 4.8 (50 reviews)</p>
+      <p class="service"> 300 ${serviceType} tasks</p>
+      <p class="state"> ${artisanData.state}</p>
+    </div>
+    <div class="artisan-footer">
+      <p class="experience">Expfhf hfudfyd asdhurhddyuh yidaue rieyuey qyuyerury eituryr eriwewueu wetrutruyt erururyry urururu ieririri ueryueryuer ueruyeuer rururur ieieirurur erience: ${artisan.experience}</p>
+      <button type="button" value="${ artisan.user_id }" class="btn btn-info schedule-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Select and Continue
+      </button> 
+    </div>
+  </div>
+  -->
+ 
+  <div id="crafter-boards">
+   <!-- Dynamically update crafter boards from jquery-->
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade schedule-modal-cont" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog .modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header artisan-header">
+          <!-- Image and header text are dynamically from jquery-->
+          <img src="" alt=""  id="arisanImage1" class="artisan-image">
+          <h1 class="modal-title fs-5 mx-2 headerTexts" id="staticBackdropLabel headerText"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="dateTimeForm" method="post" action="/services/booking/confirm/{{service_id}}">
+          <div class="modal-body-container modal-body" id="modalBodyContent">
+            <!-- Form to select date and time -->
+            <div class="datepicker1 info" id="datePicker"></div>
+            <input type="text" class="timepicker1 form-select info" id="timePicker">
+            
+            <p class="info-text">Choose your task date and start time. You can chat to adjust task details or change start time after confirming.</p>
+
+            <!-- Output of date and time requested for, It is dynamically updated-->
+            <p id="date-time-request" class="request-date-time">You request for: <span class="requestDate" style="font-weight: bold;"></span> at <span class="requestTime" style="font-weight: bold;"></span></p>
+            <p class="tasker-time">This Tasker requires 2 hour minimum</p>
+          
+
+            <p class="info-text">Next, confirm your details to get connected with your Tasker.</p>
+            
+            <!-- Inpput to be submitted, from jquery dynamic contents-->
+            <input type="text" id="date"  name="date" hidden> 
+            <input type="text" id="time"  name="time" hidden>
+            <input type="text" id="artisanName" name="artisan_name" hidden>
+            <input type="text" id="serviceName" name="service_name" hidden>
+            <input type="text" id="artisanProfilepicture" name="artisan_profile_picture" hidden>
+            <input type="text" id="artisanPrice" name="artisan_price" hidden>
+            <input type="text" id="artisanID" name="artisan_id" hidden>
+            <!-- Input by user to be submitted from flask--> 
+            <input type="text" name="state" value="{{user_task_details.state}}" hidden>
+            <input type="text" name="LGA" value="{{user_task_details.LGA}}" hidden>
+            <input type="text" name="address" value="{{user_task_details.address}}" hidden>
+            <input type="text" name="size" value="{{user_task_details.size}}" hidden>
+            <input type="text" name="description" value="{{user_task_details.description}}" hidden>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-info text-center schedule-submit-btn" type="submit">
+              Select and Continue
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+     
+
+  
+
+
+  <!--
+  <ul id="item-list">
+    <!-Items will be dynamically populated here --
+  </ul>
+  -->
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" id="prev" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" id="next" href="#">Next</a></li>
+    </ul>
+  </nav>
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+
+
+{% block scripts %}
+{{ super() }}
+<!-- Embedding data in a script tag as JSON -->
+<script id="dataForArtisans" type="application/json">{{ artisans | tojson }}</script>
+<script id="dataForArtisansUser" type="application/json">{{ artisans_user_data | tojson }}</script>
+<script id="serviceType" type="application/json">{{ service_name | tojson }}</script>
+<script src="{{ url_for('static', filename='js/services/booking_recommendation.js') }}"></script>
+<!-- Jquery date picker-->
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<!-- Jquery time picker-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+{% endblock %}
+

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/message/chat.css') }}">
+{% endblock %}
+
+{% block title %}Booking Confirm{% endblock %}
+{% block header %}{% endblock %}
+
+{% block flashmessage %}
+{{ super() }}
+{% endblock %}
+
+
+
+{% block content %}
+<h1>In-App Messaging and Notifications</h1>
+<div class="chat-container">
+    <h1>Private Chat Application</h1>
+    <p id="userID">{{ current_user.id }}</p>
+    <div id="messages" class="messages"></div>
+    <form id="form" class="form-container">
+        <input id="recipient" placeholder="Recipient" autocomplete="off" /><br>
+        <input id="input" placeholder="Message" autocomplete="off" /><button>Send</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/message/chat.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.min.js"></script>
+{% endblock %}

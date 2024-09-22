@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register_artisan.css') }}">
+{% endblock %}
+
+{% block header %} {% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block content %}
+
+
+<main>
+  <section>
+    <p class="message"></p>
+    <div class="register-container">
+      <div class="row justify-content-center mt-2">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Signup</h4>
+              <!-- Element to display validation message -->
+              <div id="messageError" class="error-message" style="display: none;"></div>
+            </div>
+            <div class="card-body">
+              <form id="signupForm" method="post">
+                <div class="form-group" id="emailSignup">
+                  <label id="emailLabel" for="email">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required minlength="11">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password">
+                </div>
+                <button type="submit" id="signup" class="btn btn-outline-info mt-3">Signup</button>
+              </form>
+              <div class="mt-3 text-center"><p>Already have an account? <a href="{{ url_for('auth.login')}}"><button class="btn btn-outline-info">Signin</button></a></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="otpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog otp-modal-contn">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Enter OTP</h1>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="otpMSG" class="msg-otp" style="display: none;"></p>
+            <form id="otpForm" method="post">
+              <div class="form-group">
+                <input type="text" class="form-control" id="otpInput" name="otpInput">
+              </div>
+              <!-- You can add more fields here if needed -->
+              <button type="submit" class="btn btn-primary">Submit OTP</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+ 
+
+  
+</main>
+{% endblock %}
+
+{% block footer %} {% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/auth/register_artisan.js') }}"></script>
+{% endblock %}
+
+

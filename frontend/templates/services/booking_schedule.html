@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking_schedule.css') }}">
+{% endblock %}
+
+{% block title %}Booking{% endblock %}
+
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+	<section>
+		<p>booking_schedule</p>
+		<div class="modal-content">
+			<span id="closeModalBtn" class="close">&times;</span>
+			<h2>Modal Content</h2>
+			<!-- Add your modal content here -->
+		</div>	
+	</section>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/services/booking_schedule.js') }}"></script>
+{% endblock %}
+

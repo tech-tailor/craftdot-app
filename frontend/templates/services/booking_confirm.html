@@ -1,0 +1,154 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking_confirm.css') }}">
+{% endblock %}
+
+{% block title %}Booking Confirm{% endblock %}
+{% block header %}
+<div id="header-cont" class="blurred">
+  <div class="bar-logo">
+    <a href="{{ url_for('main.home')}}"><img class="logo" src="{{ url_for('static', filename='favicon.ico')}}" alt=""></a>
+    <div class="progress progress-item" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar bg-info" style="width: 100%">3/3</div>
+    </div>
+  </div>
+  <div class="task-headline">You're almost done! We just need a few more details to connect you with your Tasker.</div>
+</div>
+{% endblock %}
+
+{% block flashmessage %}
+{{ super() }}
+{% endblock %}
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  <section>
+    <form id="bookingForm" method="post" action="#">
+      <div class="container-detail1">
+        <div class="artisan-details">
+          <p class="service-type">washing</p>
+          <img src="{{ booking.artisan_profile_picture}}" class="artisan-picture" alt="{{ booking.artisan_name }}">
+          <p class="artisan-name">{{ booking.artisan_name }}</p>
+        </div>
+        <div class="task-details">
+          <p>{{ booking }}</p>
+          <p>{{ booking.date}} at {{ booking.time}}</p>
+          <p class="artisan-min-time">2 HOUR MINIMUM</p>
+          <p>{{ booking.address}}, {{booking.LGA}}, {{ booking.state }}</p>
+          <p>{{ booking.size }}</p>
+        </div>
+        <div class="task-description">
+          <label for="description-box">Your task details</label>
+          <textarea class="form-control descrptn-box" name="description-box" id="taskDescription" rows="5" maxlength="150" aria-valuenow="hhhhh" ></textarea>
+        </div>
+
+        <div class="rate-container">
+          <div class="rate-item">
+              <span class="label">Hourly Rate</span>
+              <span class="value">#{{ booking.artisan_price}}/hr</span>
+          </div>
+          <div class="rate-item">
+              <span class="label">Platform Support Fee (10%)</span>
+              <span class="value">#{{ ten_percent_booking_fee }}/hr</span>
+          </div>
+          <div class="rate-item">
+              <span class="label" style="font-weight: bold" >Total Rate</span>
+              <span class="value" style="font-weight: bold">#{{ total_booking_fee }}/hr</span>
+          </div>
+        </div>
+
+        <div class="info-txt">
+          <p>You may see a temporary hold on your payment method in the amount of your Tasker's hourly rate of #{{ booking.artisan_price}}. You can cancel at any time. Tasks cancelled less than 24 hours before the start time may be billed a cancellation fee of one hour. Tasks have a one-hour minimum.</p>
+        <p>Please follow all public health regulations in your area. Learn more.</p>
+        </div>
+      </div>
+
+      
+      <div class="payment-box">
+        <h5 style="font-weight: bold">Payment Method</h5>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" value="Online payment at job completion" name="payment_type" id="paymentType" checked>
+          <label class="form-check-label" for="payment_type">
+            Online payment
+          </label>
+          <p><small>Pay at job completion</small><br>
+          <small>Get 10% of your total payment when you pay online</small><br>
+          <small>Pay #3000 instead of  <strike class="text-bold text-danger">#{{ booking.artisan_price }}</strike> when you pay online</small></p>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" value="Cash payment at job completion" type="radio" name="payment_type" id="paymentType">
+          <label class="form-check-label" for="payment_type">
+            Cash payment at job completion
+          </label>
+          <p><small>Pay at job completion</small></p>
+        </div>
+
+        <button type="button" class="btn btn-outline-info confirm-btn" id="confirmTask" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Confirm and Chat
+        </button>
+        <p class="info-txt">Don’t worry, you won’t be billed until your task is complete. Once confirmed, you can chat with your Tasker to update the details.</p>
+      </div> 
+    </form>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog .modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="" alt="" id="arisanImage" class="artisan-image">
+          <h1 class="modal-title fs-5 headerTexts" id="staticBackdropLabel headerText">
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="recaptcha" method="post" action="/services/book/task">
+          <div class="modal-body recaptcha-box" id="modalBodyContent"><br/>
+            <div class="g-recaptcha recaptcha-box" data-sitekey="{{ recaptcha_site_key}}"></div>
+            <br/>
+            <!-- Send the datas to the backend for booking processing-->
+            <input type="text" name="service_id" value="{{ service_id}}" hidden>
+            <input type="text" name="artisan_id" value="{{ booking.artisan_id}}" hidden>
+            <input type="text" name="job_date" value="{{ booking.date}}" hidden>
+            <input type="text" name="job_time" value="{{ booking.time}}" hidden>
+            <input type="text" name="job_price" value="{{ booking.artisan_price }}" hidden>
+            <input type="text" name="job_address" value="{{ booking.address}}" hidden>
+            <input type="text" name="job_state" value="{{ booking.state}}" hidden>
+            <input type="text" name="job_LGA" value="{{ booking.LGA}}" hidden>
+            <input type="text" name="job_size" value="{{ booking.size}}" hidden>
+            <!-- This Job description is updated dynamically, incase new text are entered-->
+            <input type="text" name="job_description" value="" id="jobDescription" hidden>
+            <!-- This psyment type name and value is dynamically updated from jquery-->
+            <input id="thePaymentType" type="text" name="payment_type" hidden>
+            <input type="submit" value="Submit" class="btn btn-info text-center">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-- Embedding data in a script tag as JSON -->
+<script id="descriptionForbooking">"{{ booking.description }}"</script>
+<script src="{{ url_for('static', filename='js/services/booking_confirm.js') }}"></script>
+<!-- Google recaptcha script-->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account/update.css') }}">
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block additinal_nav%} {% endblock %}
+
+{% block content %}
+<main>
+  <section>
+    <h2 class="account-title">My Account</h2>
+    <div class="account-box">
+      <div>
+        <select id="accountState" name="account" class="form-select">
+          <option value="profile" selected>Profile</option>
+          <option value="password">Password</option>
+          <option value="notification">Notification</option>
+          <option value="my-task">My Task</option>
+        </select>
+      </div>
+  
+      <div class="account-subheading">
+        <p class="subtitle">Account</p>
+        
+      </div>
+  
+      <div class="account-details">
+        <img class="account-profile-picture" src="" alt="">
+        <p class="username"> OGUNDARE AKINNIYI</p>
+        <p class="userphone">+2347065727413</p>
+        <p class="usermail">ogundareakinniyi@gmail.com</p>
+        <p class="user-type">Personal task account</p>
+        <a href="{{ url_for('auth.logout')}}"><button class="btn btn-outline-info" type="button">Logout</button></a>
+      </div>
+
+      <div class="submit-buttons">
+        <div class="edit-button"><button type="submit" id="edit" class="btn btn-outline-info mt-3">cancel</button></div>
+        <div class="edit-button"><button type="submit" id="edit" class="btn btn-outline-info mt-3">save</button></div>
+      </div>
+    </div>
+    
+      
+    
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/account/update.js') }}"></script>
+{% endblock %}

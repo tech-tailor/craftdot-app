@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account/my_tasks.css') }}">
+{% endblock %}
+
+{% block title %}My tasks{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block additinal_nav%} {% endblock %}
+
+{% block content %}
+<main>
+  <section>
+    <h2 class="account-title">My Account</h2>
+    <div class="account-box">
+      <div>
+        <select id="accountState" name="account" class="form-select">
+          <option value="profile">Profile</option>
+          <option value="password">Password</option>
+          <option value="notification">Notification</option>
+          <option value="my-task" selected>My Task</option>
+        </select>
+      </div>
+  
+      <div class="account-subheading">
+        <p class="subtitle">My Tasks</p>
+        <div>
+          <select id="filterTask" name="filtertask" class="form-select filter-tasks">
+            <option selected>Filter</option>
+            <option>All</option>
+            <option>Ongoing</option>
+            <option>Completed</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="task-list">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Task</th>
+              <th scope="col">Date</th>
+              <th scope="col">State</th>
+            </tr>
+            <tbody>
+              <a href="#">
+                <th scope="row">Cleaning</th>
+                <td>23, May, 2024</td>
+                <td>Completed</td>
+              </a>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+    
+      
+    
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/account/my_tasks.js') }}"></script>
+{% endblock %}

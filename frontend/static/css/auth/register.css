@@ -1,0 +1,28 @@
+main {
+    margin-top: 80px;
+}
+
+.message {
+    text-align: center;
+    margin: 0px;
+}
+
+.register-container {
+    margin: 40px 20px 40px 20px;
+}
+
+
+.togglesignup {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.otp-modal-contn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.error-message {
+    color: red;
+}

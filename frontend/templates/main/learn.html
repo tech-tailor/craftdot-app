@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/learn.css') }}">
+{% endblock %}
+
+{% block title %}Learn Crypto{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block content %}
+
+<main>
+  <section class="learn-container">
+    <div class="container mb-4">
+        <h4>Learning links for me</h4>
+        <ul>
+            <li><a href="{{ url_for('main.learn', topic='crypto') }}" target="_blank" rel="noopener noreferrer">
+                learn crypto
+              </a>
+            </li>
+            <li>
+            <a href="{{ url_for('main.learn', topic='forex') }}" target="_blank" rel="noopener noreferrer">
+                learn forex
+            </a>
+            </li>
+        </ul>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/main/learn.js') }}"></script>
+{% endblock %}

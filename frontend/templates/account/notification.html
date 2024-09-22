@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account/notification.css') }}">
+{% endblock %}
+
+{% block title %}Password{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block additinal_nav%} {% endblock %}
+
+{% block content %}
+<main>
+  <section>
+  </div>
+  <h2 class="account-title">My Account</h2>
+  <div class="account-box">
+    <div>
+      <select id="accountState" name="account" class="form-select">
+        <option value="profile">Profile</option>
+        <option value="password">Password</option>
+        <option value="notification" selected>Notification</option>
+        <option value="my-task">My Task</option>
+      </select>
+    </div>
+
+
+    <div id="content">
+      <h3 class="text-center">No notification yet</h3>
+    </div>
+    
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/account/notification.js') }}"></script>
+{% endblock %}

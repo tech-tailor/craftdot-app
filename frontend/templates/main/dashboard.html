@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/home.css') }}">
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block additinal_nav%}
+
+{% endblock %}
+
+
+
+{% block content %}
+<main class="main-cont">
+  <section class="mini-video">
+    <div class="hero-video">
+      <video autoplay loop muted width="350">
+        <source src="{{ url_for('static', filename='videos/cleaner.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  
+  <section class="service">
+    <h2 class="service-text text-center">Featured services</h2>
+    <p class="">Do you need an experienced person to do your job? find the services and the artisans you need here</p>
+    <div class=" row row-cols-1 row-cols-md-3 text-center service-container ">
+      {% for service in services %}
+      
+      <p></p>
+      <div class="col mb-3">
+        <div class="card h-100">
+          <img src="{{ url_for('admin_create.serve_file', service_id=service.id) }}" class="card-img-top" alt="{{ service.name }} picture">
+          <div class="card-body">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <p class="card-text"></p>
+          </div>
+        </div>
+      </div>
+      
+      {% endfor %}
+      
+    </div>
+  </section>
+
+  
+
+  <section>
+    <div class="text-center">
+      <div class="">
+        <form class="" role="search">
+          <input class="form-control me-2 mb-3" type="search" placeholder="Search for a service" aria-label="Search">
+          <button class="btn btn-outline-info" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class=" my-5">
+      <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              How to book for a service?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Our mission is to provide high-quality products and excellent customer service to our valued customers.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              How can I place an order?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can place an order through our website or by contacting our customer service representatives.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Do you offer any discounts or promotions?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, we frequently offer discounts and promotions. Please check our website or subscribe to our newsletter to stay updated.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="my-5">
+      <h2 class="text-center mb-1">Testimonials and Reviews</h2>
+      <p class="text-center mb-2">What people are saying about Craftdot</p>
+      <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card">
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <div class="text-center mb-2 rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  <p>"I've been using this product for years, and I'm incredibly satisfied with its performance and durability. Highly recommended!"</p>
+                  <footer class="blockquote-footer">John Doe, <cite title="Source Title">Happy Customer</cite></footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <div class="text-center mb-2 rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  <p>"The customer service team is exceptional! They went above and beyond to ensure my issue was resolved quickly and efficiently."</p>
+                  <footer class="blockquote-footer">Jane Smith, <cite title="Source Title">Satisfied Client</cite></footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <div class="text-center mb-2 rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  <p>"This product has exceeded my expectations in every way. It's user-friendly, efficient, and offers great value for money."</p>
+                  <footer class="blockquote-footer">Michael Johnson, <cite title="Source Title">Loyal Customer</cite></footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {% if not current_user.is_authenticated %}
+  <div class="text-center mb-2">
+    <p>Signin to get access to many good services in your location</p>
+    <a href="{{ url_for('auth.login')}}"><button class="btn btn-primary " type="submit">Signin</button></a>
+  </div>
+  {% endif %}
+  
+
+
+
+
+  
+        
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/main/home.js') }}"></script>
+{% endblock %}
+

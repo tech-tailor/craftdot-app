@@ -1,0 +1,50 @@
+/* Reset and Basic Styles */
+.main {
+    margin-top: 100px;
+}
+
+.search-container {
+    width: 100%;
+    text-align: center;
+}
+
+
+.services {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 50px 0 40px 0;
+
+}
+
+.services-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 10px;
+    column-gap: 10px;
+    align-content: stretch;
+}
+
+.service-link {
+    flex-grow: 1;
+    flex-basis: auto;
+}
+
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}

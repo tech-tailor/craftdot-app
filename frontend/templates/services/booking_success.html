@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking_success.css') }}">
+{% endblock %}
+
+{% block title %}Booking Confirm{% endblock %}
+{% block header %}{% endblock %}
+
+{% block flashmessage %}
+{{ super() }}
+{% endblock %}
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  <section>
+    <div>
+      <p>Successfully booked</p>
+      <p>Find below booking details</p>
+      <p>Booking ID: {{ response.id}} </p>
+      <p>Date: {{response.job_date}}</p>
+      <p>Time: {{response.job_time}}</p>
+      <p>Address: {{response.job_address}}, {{response.job_LGA}}, {{response.job_state}}.</p>
+      <p>Job description: {{ response.job_description }}</p>
+      <p>Price: {{response.job_price}}/hr</p>
+      <p>Payment Type: {{ response.payment_type }}</p>
+
+    </div>
+  </section>
+
+</main>
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script src="{{ url_for('static', filename='js/services/booking_success.js') }}"></script>
+{% endblock %}
+

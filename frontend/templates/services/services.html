@@ -1,0 +1,72 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/services.css') }}">
+{% endblock %}
+
+{% block title %}Services{% endblock %}
+
+{% block headers %} {% endblock %}
+
+
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  <section class="services container">
+    <h1>Services offered</h1>
+    <div class="card-group" id="service-card">
+      <!-- Sample html for the service card
+      <div class="card">
+        <img src="{{ url_for('static', filename='images/tailor.jpeg') }}" class="card-img-top" alt="...">
+        <div class="card-footer">
+          <p class="text-body-secondary text-bold">{{ service }}</p>
+        </div>
+      </div>
+      -->
+      <!-- Services will be updated dynamically -->
+    </div>
+
+    <section class="service">
+      <h2 class="service-text text-center">Featured services</h2>
+      <p class="">Do you need an experienced person to do your job? find the services and the artisans you need here</p>
+      <div class=" row row-cols-1 row-cols-md-3 text-center service-container ">
+        {% for service in services %}
+        
+        <p></p>
+        <div class="col mb-3">
+          <div class="card h-100">
+            <img src="{{ url_for('main.serve_file', service_id=service.id, file_name=service.service_picture) }}" class="card-img-top" alt="{{ service.name }} picture">
+            <div class="card-body">
+              <h5 class="card-title">{{ service.name }}</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        
+        {% endfor %}
+        
+      </div>
+    </section>
+    
+  </section>
+  <!-- Send the services to Jquery for filtering -->
+  <script id="services" type="application/json">{{ services | tojson }}</script>
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/services/services.js') }}"></script>
+{% endblock %}
+
+

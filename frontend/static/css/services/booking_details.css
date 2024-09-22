@@ -1,0 +1,99 @@
+/* Reset and Basic Styles */
+
+.main {
+    margin: 0 auto;
+
+}
+
+/* Sections */
+section {
+    padding: 20px;
+}
+
+.bar-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: 1px solid #ccc;
+    padding: 20px;
+
+    
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.progress-item {
+    flex-grow: 1;
+    align-self: center;
+    margin-left: 10px;
+    height: 20px;
+
+}
+
+.task-headline {
+    padding: 20px;
+    border: 1px solid #ccc;
+
+}
+
+.task-text {
+    font-weight: 600;
+    font-size: 1.8em;
+}
+
+.contner-title {
+    font-weight: 600;
+}
+
+.task-location {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: 500;
+    
+}
+
+.task-option {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.task-type-check {
+    font-weight: 500;
+    margin-bottom: 10px;
+
+}
+
+.task-description {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.available-crafter-btn {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}

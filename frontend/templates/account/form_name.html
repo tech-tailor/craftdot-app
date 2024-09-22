@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account/form_name.css') }}">
+{% endblock %}
+
+{% block header %} {% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block content %}
+<main>
+  <section>
+    <div class="login-container">
+      <div class="row justify-content-center ">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Tell us your name</h4>
+            </div>
+            <div class="card-body">
+              <form class="user-update-form" id="userUpdateform" enctype="multipart/form-data">
+                <div class="form-group"  id="userForm">
+                  
+        
+                  <label for="first_name">First name</label>
+                  <input type="text" name="first_name" class="form-control" id="firstName">
+                  
+                  
+        
+                  <label for="last_name">Last name</label>
+                  <input type="text" name="last_name" class="form-control" id="lastName">
+
+        
+                  
+          
+                  <div class="edit-button"><button type="button" id="cancel" class="btn btn-outline-info mt-3">cancel</button></div>
+                  <button type="submit" id="saveNewuser" class="btn btn-info mt-3">save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+{% block footer %} {% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/account/form_name.js') }}"></script>
+{% endblock %}

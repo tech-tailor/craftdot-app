@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account/profile.css') }}">
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block additinal_nav%} {% endblock %}
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  <section>
+    <h2 class="account-title">My Account</h2>
+    <div class="account-box">
+      <!-- Account selection input-->
+      <div>
+        <select id="accountState" name="account" class="form-select">
+          <option value="profile" selected>Profile</option>
+          <option value="password">Password</option>
+          <option value="notification">Notification</option>
+          <option value="my-task">My Task</option>
+        </select>
+      </div>
+  
+      <div class="account-subheading">
+        <p class="subtitle" id="subtitle">Account</p>
+        <div class="edit-button"><button type="submit" id="editProfile" class="btn btn-outline-info mt-3">Edit</button></div>
+      </div>
+      <!-- Account profile details-->
+      <div class="account-details" id="accountDetails">
+        <img class="account-profile-picture" src="" alt="">
+        <p class="usernames" id="userNames"></p>
+        <p class="userphone" id="userPhone"></p>
+        <p class="useremail" id="userEmail"></p>
+        <p class="user-type" id="userType"></p>
+        <a href="{{ url_for('auth.logout')}}"><button class="btn btn-outline-info" type="button">Logout</button></a>
+      </div>
+
+      <!-- Acount form to update profile form -->
+      <form class="user-update-form" id="userUpdateform" enctype="multipart/form-data">
+        <div class="form-group" style="display:none;" id="userForm">
+          <input type="file" id="inputPicture" name="profile_picture" class="profilepicture" hidden><br><br>
+          <img src="" id="profilePicture" class="profilepicture" alt="Profile Picture Preview">
+
+          <label for="first_name">First name</label>
+          <input type="text" name="first_name" class="form-control" id="firstName">
+          
+          
+
+          <label for="last_name">Last name</label>
+          <input type="text" name="last_name" class="form-control" id="lastName">
+          
+          <label for="phone_number">Phone number</label>
+          <input type="tel" name="phone_number" class="form-control" id="phoneNumber">
+
+          <label for="email">Email</label>
+          <input type="email" name="email" class="form-control" id="email">
+          
+          <label for="street_address">Address</label>
+          <input type="text" name="street_address" class="form-control" id="streetAddress">
+
+          <label for="lga">LGA</label>
+          <input type="text" name="lga" class="form-control" id="myLGA">
+
+  
+          <label for="state">State</label>
+          <input type="text" name="state" class="form-control" id="state">
+  
+          <label for="country">Country</label>
+          <input type="text" name="country"  class="form-control" id="country">
+          
+          <!-- Artisan added field, it is hidden and only show when it is an artisan-->
+          <label for="service" class="service-type">Service type</label>
+          <input type="text" name="service" class="form-control service-type" id="serviceType" disabled>
+
+          <!-- Get the user lon and lat to cal precise location -->
+          <label for="longitude"></label>
+          <input type="text" name="longitude" class="form-control" id="longitude" hidden disabled>
+  
+          <label for="latitude"></label>
+          <input type="text" name="latitude" class="form-control" id="latitude" hidden disabled>
+           
+          <div class="edit-button"><button type="button" id="cancel" class="btn btn-outline-info mt-3">cancel</button></div>
+          <button type="submit" id="saveNewuser" class="btn btn-info mt-3">save</button>
+        </div>
+      </form>
+
+      
+    </div>
+  </section>
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-- Send User data to jquery-->
+<script id="theUserData" type="application/json" >{{ user_data | tojson }}</script>
+<script id="theArtisanData" type="application/json" >{{ artisan_data | tojson }}</script>
+<script src="{{ url_for('static', filename='js/account/profile.js') }}"></script>
+{% endblock %}

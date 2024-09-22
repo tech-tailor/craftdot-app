@@ -1,0 +1,56 @@
+
+
+.account-title {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.account-box {
+    border: 1px solid #cccc;
+    padding: 18px;
+}
+
+
+.account-subheading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #cccc;
+}
+
+.account-subheading .subtitle {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.account-subheading .edit-button {
+    margin-bottom: 10px;
+}
+
+
+
+.password {
+    margin-top: 20px;
+    text-align: start;
+    font-size: 1em;
+    font-weight: 500;
+    border-bottom: 1px solid #cccc;
+}
+
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}

@@ -1,0 +1,73 @@
+
+
+.account-title {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.account-box {
+    border: 1px solid #cccc;
+    padding: 18px;
+}
+
+
+.account-subheading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #cccc;
+    margin-top: 30px;
+}
+
+.account-subheading .subtitle {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.account-subheading .filter-tasks {
+    margin-bottom: 10px;
+}
+
+
+
+.password {
+    margin-top: 20px;
+    text-align: start;
+    font-size: 1em;
+    font-weight: 500;
+    border-bottom: 1px solid #cccc;
+}
+
+.task-list {
+    margin-top: 20px;
+    
+}
+
+thead,
+tfoot {
+  background-color: rgb(228 240 245);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
+}
+

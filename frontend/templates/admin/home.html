@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/home.css') }}">
+{% endblock %}
+
+
+{% block title %}Admin_home{% endblock %}
+
+{% block additinal_nav%}
+
+{% endblock %}
+
+
+
+{% block content %}
+<main class="main-cont">
+  <h2>ADMIN Home</h2>
+
+
+
+  
+  
+
+
+
+
+  
+        
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/admin/home.js') }}"></script>
+{% endblock %}
+

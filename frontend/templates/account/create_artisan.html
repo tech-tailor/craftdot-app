@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/services/booking.css') }}">
+{% endblock %}
+
+{% block title %}Booking{% endblock %}
+
+{% block additinal_nav%}
+<li class="nav-item">
+  <a class="nav-link" href="{{ url_for('account.profile')}}">Account</a>
+</li>
+{% endblock %}
+
+
+
+{% block content %}
+<main class="main">
+
+  <section>
+    <div class="text-center m">
+      <div class="container">
+        <form class="" role="search">
+          <input class="form-control me-2 mb-3" type="search" placeholder="Search for a service" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <p>{{ form_data }}</p>
+  
+  <section>
+    <div class="services">
+      <p class="text-center">Create Artisan</p>
+      <form action="/account/create" method="post">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="phone" class="form-control" id="availability" name="phone_number">
+          <label for="password">password</label>
+          <input type="password" class="form-control" id="password" name="password">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+          <label for="skill">Skill</label>
+          <input type="text" class="form-control" id="skill" name="skills">
+          <label for="availability">Availabilty</label>
+          <input type="text" class="form-control" id="availability" name="availability">
+          <label for="inputPrice">Price/hr</label>
+          <input type="text" class="form-control" id="inputPrice" name="pricing">
+          <label for="inputExperience">Experience</label>
+          <input type="text" class="form-control" id="inputExperience" name="experience">
+          
+          
+          <select id="inputservice" name="service_id"  class="form-select form-control">
+            <option selected>Select service that you offer</option>
+            {% for service in services %}
+              <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+          </select>
+          
+          <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/services/booking.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+main {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.services {
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    margin: 10px;
+
+}
+
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}

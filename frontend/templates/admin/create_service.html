@@ -1,0 +1,59 @@
+{% extends 'admin_base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/create_service.css') }}">
+{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block headers %} {% endblock %}
+
+{% block additinal_nav%} {% endblock %}
+
+{% block content %}
+<main id="main-cont" class="main blurred">
+  <section>
+    <h2 class="account-title">Create Service</h2>
+    <div class="account-box">
+
+      <!-- Acount form to update profile form -->
+      <form class="user-update-form" method="post" action="{{ url_for('admin_create.create_service') }}" id="userUpdateform" enctype="multipart/form-data">
+        <div class="form-group"  id="userForm">
+          <label for="service_icon">Service icon</label>
+          <input type="file" id="inputIcon" name="service_icon" class="service-icon" hidden>
+          <img src="" id="serviceIcon" class="service-icon" alt="service icon">
+
+          <label for="name">Service name</label>
+          <input type="text" name="name" class="form-control" id="firstName" required>
+          
+          
+
+          <label for="description">Description</label>
+          <input type="text" name="description" class="form-control" id="lastName" required>
+
+          <input type="file" id="inputPicture" name="service_picture" class="profilepicture" hidden>
+          <img src="" id="profilePicture" class="profilepicture" alt="Profile Picture Preview">
+           
+          <div class="edit-button"><a href="{{ url_for('admin.home')}}"><button type="button" id="cancel" class="btn btn-outline-info mt-3">cancel</button></a></div>
+          <button type="submit" id="saveNewuser" class="btn btn-info mt-3">save</button>
+        </div>
+      </form>
+
+      
+    </div>
+  </section>
+</main>
+
+<!-- Modal spinning loader-->
+<div class="container-spinner">
+  <div class="spinner-border text-info spinner-loader" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/admin/create_service.js') }}"></script>
+{% endblock %}

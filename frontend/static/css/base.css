@@ -1,0 +1,217 @@
+/* Default styles (apply to all devices) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background-color: #fff;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-title {
+    margin-left: 20px;
+}
+
+a {
+    color: #17a2b8;
+    text-decoration: none;
+    z-index: 0;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #17a2b8;
+}
+
+/* Modal settings for spinner*/
+.container-spinner {
+    display: block;
+    position: fixed;
+    right: 40%;
+    top: 40%;
+    z-index: 1;
+}
+.spinner-loader {
+    width: 5rem;
+    height: 5rem;
+}
+
+.blurred {
+    filter: blur(2px);
+}
+
+/* Styles for mobile devices */
+@media (max-width: 767px) {
+    body {
+      font-size: 1rem;
+    }
+    /* Additional mobile-specific styles */
+    .main-container {
+        margin: 50px 10px 30px 10px;
+        padding: 10px;
+
+    }
+
+    .info-msg {
+        display: block;
+        margin-top: 10px;
+        color: blue;
+        padding: 10px;
+        background-color: #f4f4f4;
+        list-style: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .error-msg {
+        display: block;
+        margin-top: 10px;
+        color: red;
+        padding: 10px;
+        background-color: #f4f4f4;
+        list-style: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .success-msg {
+        display: block;
+        margin-top: 10px;
+        color: green;
+        padding: 10px;
+        background-color: #f4f4f4;
+        list-style: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .app-links {
+        margin-top: 20px;
+    }
+
+    .app-links a {
+        margin: 0 10px;
+    }
+}
+
+
+/* Styles for tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        font-size: 1.25rem;
+    }
+    /* Additional tablet-specific styles */
+
+    .main-container {
+        margin: 80px 50px 80px 50px;
+  
+
+    }
+
+
+    /* Footer */
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .app-links {
+        margin-top: 20px;
+    }
+
+    .app-links a {
+        margin: 0 10px;
+    }
+}
+
+
+/* Styles for desktops */
+@media (min-width: 1024px) {
+    body {
+        font-size: 1.5rem;
+    }
+
+    .flashes {
+        background-color: #f4f4f4;
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .main-container {
+        margin: 100px 70px 100px 70px;
+        padding: 20px;
+
+    }
+
+    
+    /* Footer */
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .app-links {
+        margin-top: 20px;
+    }
+
+    .app-links a {
+        margin: 0 10px;
+    }
+}
+
+
+
+
+
